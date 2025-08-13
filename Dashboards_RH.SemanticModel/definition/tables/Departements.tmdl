@@ -1,0 +1,29 @@
+table Departements
+	lineageTag: 8bfb0614-d5c1-4d82-83dd-b5de4c8f1b10
+
+	measure 'Nbre departement' = COUNTROWS(Departements)
+		formatString: 0
+		lineageTag: 3b6867ff-da52-4820-8c91-fc8beedd1a48
+
+	column Department
+		dataType: string
+		lineageTag: a18552c7-83d9-4633-a50d-e222d8d3bdac
+		summarizeBy: none
+		sourceColumn: Department
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Departements = m
+		mode: import
+		source =
+				let
+				    Source = Data_RH,
+				    #"Autres colonnes supprimées" = Table.SelectColumns(Source,{"Department"}),
+				    #"Doublons supprimés" = Table.Distinct(#"Autres colonnes supprimées")
+				in
+				    #"Doublons supprimés"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,229 @@
+table Data_RH
+	lineageTag: af2ea879-62f4-45f7-af4d-88bf7eb9e581
+
+	measure 'Masse salariale' = SUM(Data_RH[Salaire])
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		lineageTag: 7f765882-4331-41fd-8743-35593790d14a
+
+	measure Nbre_salarie = COUNTROWS(Data_RH)
+		formatString: 0
+		lineageTag: e7034b69-2886-4498-9144-aebd17527ad4
+
+	measure 'Age Moyen' = AVERAGEX(ALL(Data_RH[Tranche_age]),[Nbre_salarie])
+		formatString: 0
+		lineageTag: 20ea5bf2-67e0-4b41-bbe8-7cd961f6b5f7
+
+	measure NbreF = CALCULATE([Nbre_salarie],Data_RH[Sexe]="F")
+		formatString: 0
+		lineageTag: 94253d03-1117-4213-a1d0-12d0e8063df1
+
+	measure NbreH = CALCULATE([Nbre_salarie],Data_RH[Sexe]="M")
+		formatString: 0
+		lineageTag: d77f105f-2fa5-4efe-978c-9e18ed3cb547
+
+	measure %F = DIVIDE([NbreF],[Nbre_salarie],BLANK())
+		formatString: 0\ %;-0\ %;0\ %
+		lineageTag: 66a6bdba-752b-4e9d-89f0-b4a2ad2821bb
+
+	measure %H = DIVIDE([NbreH],[Nbre_salarie],BLANK())
+		formatString: 0\ %;-0\ %;0\ %
+		lineageTag: 33e482bc-6749-4ec3-9bf9-7feb166420e5
+
+	measure Sala_Moyen_H =
+			
+			VAR SalaireMoyen =
+			AVERAGEX(Data_RH,
+			            CALCULATE([Masse salariale], Data_RH[Sexe]="M"
+			            )
+			)
+			VAR Ans = SalaireMoyen
+			RETURN
+			    Ans
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		lineageTag: b778977e-b985-4820-8a9e-dbeb3eaf2131
+
+	measure Sala_Moyen_F =
+			
+			VAR SalaireMoyen =
+			AVERAGEX(Data_RH,
+			            CALCULATE([Masse salariale], Data_RH[Sexe]="F"
+			            )
+			)
+			VAR Ans = SalaireMoyen
+			RETURN
+			    Ans
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		lineageTag: 99469795-bfaf-4bef-8fa8-d3b13292111c
+
+	measure Nbre_emb = COUNTROWS(Data_RH)
+		formatString: 0
+		lineageTag: 3611b1da-26c1-472c-ba55-2e0529d6e355
+
+	measure Sala_Moyen = DIVIDE([Masse salariale],[Nbre_salarie],BLANK())
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		lineageTag: 79598501-5e8e-4457-83c0-4ed3c57be88e
+
+	column Matricule
+		dataType: int64
+		formatString: 0
+		lineageTag: a0052f93-a4f1-4c8e-91b2-0758df25ca11
+		summarizeBy: none
+		sourceColumn: Matricule
+
+		annotation SummarizationSetBy = Automatic
+
+	column Salaire
+		dataType: int64
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		lineageTag: 1529a696-af86-4271-9678-02c652db5886
+		summarizeBy: sum
+		sourceColumn: Salaire
+
+		annotation SummarizationSetBy = Automatic
+
+	column Poste
+		dataType: string
+		lineageTag: a0235236-3cc0-4d1b-8739-5b49b6e79dd3
+		summarizeBy: none
+		sourceColumn: Poste
+
+		annotation SummarizationSetBy = Automatic
+
+	column Filiale
+		dataType: string
+		lineageTag: 0d8fdaed-e94f-40be-a36c-d4ff61bc8553
+		summarizeBy: none
+		sourceColumn: Filiale
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date naissance'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 7209d4e1-022c-4ce9-ae8c-b2676b15eb19
+		summarizeBy: none
+		sourceColumn: Date naissance
+
+		variation Variation
+			isDefault
+			relationship: 1bd4f655-995e-47a0-abac-c9730afdfa0d
+			defaultHierarchy: LocalDateTable_23c69264-dd6c-4df2-9464-6a9e4ab6a480.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Sexe
+		dataType: string
+		lineageTag: 2d2f5e0d-084b-4faf-845a-c3d30e6b0139
+		summarizeBy: none
+		sourceColumn: Sexe
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date Embauche'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 458496c0-294a-435b-96f7-c019e05f66db
+		summarizeBy: none
+		sourceColumn: Date Embauche
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Date départ'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 76d79c62-e7d3-416e-ba65-b62f17225fa3
+		summarizeBy: none
+		sourceColumn: Date départ
+
+		variation Variation
+			isDefault
+			relationship: 78172605-c756-40d1-a97d-c9e2fe5bdbdf
+			defaultHierarchy: LocalDateTable_63281db5-84dd-4b89-b768-088cfb4d5d56.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Department
+		dataType: string
+		lineageTag: 9b97b25e-3a21-4c94-aa0f-23ff1a8a609b
+		summarizeBy: none
+		sourceColumn: Department
+
+		annotation SummarizationSetBy = Automatic
+
+	column ManagerName
+		dataType: string
+		lineageTag: 650d076e-8ab6-4b16-beab-5e8f4957abb3
+		summarizeBy: none
+		sourceColumn: ManagerName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Echelon
+		dataType: int64
+		formatString: 0
+		lineageTag: 4e282e20-ae66-41ec-b085-11156795eef1
+		summarizeBy: sum
+		sourceColumn: Echelon
+
+		annotation SummarizationSetBy = Automatic
+
+	column Age = DATEDIFF([Date naissance],TODAY(),YEAR)
+		formatString: 0
+		lineageTag: 8efbc11e-88d6-4c39-8539-023f3bc1683b
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Tranche_age =
+			SWITCH(
+			    TRUE(),
+			    [Age]<=40,"<=40",
+			    [Age]<=50,"41-50",
+			    [Age]<=60,"51-60",
+			    [Age]<=70,"61-70","+71"
+			)
+		lineageTag: caefb38e-6dd3-4484-8575-9fc01920ffe0
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column NOM
+		dataType: string
+		lineageTag: 30503da6-7bfd-4170-ae10-1eb4175a7759
+		summarizeBy: none
+		sourceColumn: NOM
+
+		annotation SummarizationSetBy = Automatic
+
+	column Prenom
+		dataType: string
+		lineageTag: 78317733-792d-4726-9b9f-a19ca48cc045
+		summarizeBy: none
+		sourceColumn: Prenom
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Data_RH = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\boric\Downloads\BaseRH\BaseRH\DATARH.xlsx"), null, true),
+				    TbHR_Table = Source{[Item="Feuil1",Kind="Sheet"]}[Data],
+				    #"En-têtes promus" = Table.PromoteHeaders(TbHR_Table, [PromoteAllScalars=true]),
+				    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"NOM", type text}, {"Matricule", Int64.Type}, {"Salaire", Int64.Type}, {"Poste", type text}, {"Filiale", type text}, {"Date naissance", type date}, {"Sexe", type text}, {"Date Embauche", type date}, {"Date départ", type date}, {"Department", type text}, {"ManagerName", type text}, {"Echelon", Int64.Type}}),
+				    #"Colonnes permutées" = Table.ReorderColumns(#"Type modifié",{"Matricule", "NOM", "Prenom", "Salaire", "Poste", "Filiale", "Date naissance", "Sexe", "Date Embauche", "Date départ", "Department", "ManagerName", "Echelon"}),
+				    #"Autres colonnes supprimées" = Table.SelectColumns(#"Colonnes permutées",{"Matricule", "NOM", "Prenom", "Salaire", "Poste", "Filiale", "Date naissance", "Sexe", "Date Embauche", "Date départ", "Department", "ManagerName", "Echelon"}),
+				    #"Type modifié1" = Table.TransformColumnTypes(#"Autres colonnes supprimées",{{"Prenom", type text}})
+				in
+				    #"Type modifié1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

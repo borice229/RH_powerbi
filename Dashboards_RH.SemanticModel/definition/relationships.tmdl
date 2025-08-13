@@ -1,0 +1,62 @@
+relationship 1bd4f655-995e-47a0-abac-c9730afdfa0d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Data_RH.'Date naissance'
+	toColumn: LocalDateTable_23c69264-dd6c-4df2-9464-6a9e4ab6a480.Date
+
+relationship 78172605-c756-40d1-a97d-c9e2fe5bdbdf
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Data_RH.'Date départ'
+	toColumn: LocalDateTable_63281db5-84dd-4b89-b768-088cfb4d5d56.Date
+
+relationship 874f40ec-b9ba-42b3-8257-cd493ce705ae
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Departs.'Date naissance'
+	toColumn: LocalDateTable_c083a543-009f-4cff-b19d-5ffb0151944e.Date
+
+relationship 84804f09-70d0-410d-a532-9c2c16e242c3
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Calendrier.Jours
+	toColumn: LocalDateTable_9f896226-2284-48c3-83f2-1466c80547d9.Date
+
+relationship AutoDetected_38e374fd-71ce-43c0-b93b-958af984f3e6
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: Departs.Matricule
+	toColumn: Data_RH.Matricule
+
+relationship AutoDetected_e9df7653-e50d-408d-816a-1d928418bad6
+	fromColumn: Data_RH.Filiale
+	toColumn: Filiale.Filiale
+
+relationship AutoDetected_ba380ae2-9d3a-4b3c-aa08-6337af9287e7
+	isActive: false
+	fromColumn: Departs.Filiale
+	toColumn: Filiale.Filiale
+
+relationship AutoDetected_4f69a0d0-60f0-4944-9cc3-584ef5a51fa5
+	fromColumn: Data_RH.Sexe
+	toColumn: Genre.Sexe
+
+relationship AutoDetected_5096c2b3-d6c6-4494-87f1-50fafc926626
+	isActive: false
+	fromColumn: Departs.Sexe
+	toColumn: Genre.Sexe
+
+relationship AutoDetected_6661c21b-332a-403e-89cb-592870f8fe76
+	fromColumn: Data_RH.Department
+	toColumn: Departements.Department
+
+relationship AutoDetected_898043e6-facd-4e90-87fb-c4dff8a0e1ac
+	isActive: false
+	fromColumn: Departs.Department
+	toColumn: Departements.Department
+
+relationship a0fb890d-8321-08e6-c60f-231b0cd407dd
+	fromColumn: Data_RH.'Date Embauche'
+	toColumn: Calendrier.Jours
+
+relationship 984e9137-204a-163b-5eaf-06a7e77d168e
+	isActive: false
+	fromColumn: Departs.'Date départ'
+	toColumn: Calendrier.Jours
+

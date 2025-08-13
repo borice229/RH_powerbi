@@ -1,0 +1,37 @@
+table Calendrier
+	lineageTag: d2f8afe5-6753-4f5c-b25e-a0f8aae18b0e
+
+	column Jours
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 5f5d2a3b-5f36-4d79-8d87-640a9d49ad09
+		summarizeBy: none
+		sourceColumn: Jours
+
+		variation Variation
+			isDefault
+			relationship: 84804f09-70d0-410d-a532-9c2c16e242c3
+			defaultHierarchy: LocalDateTable_9f896226-2284-48c3-83f2-1466c80547d9.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition Calendrier = m
+		mode: import
+		source =
+				let
+				    Source = Data_RH,
+				    #"Autres colonnes supprimées" = Table.SelectColumns(Source,{"Date Embauche"}),
+				    #"Plus ancienne calculée" = Number.From(List.Min(#"Autres colonnes supprimées"[Date Embauche])),
+				    Personnalisé1 = {#"Plus ancienne calculée"..Number.From(Date.From(DateTime.LocalNow()))},
+				    #"Converti en table" = Table.FromList(Personnalisé1, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+				    #"Type modifié" = Table.TransformColumnTypes(#"Converti en table",{{"Column1", type date}}),
+				    #"Colonnes renommées" = Table.RenameColumns(#"Type modifié",{{"Column1", "Jours"}})
+				in
+				    #"Colonnes renommées"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

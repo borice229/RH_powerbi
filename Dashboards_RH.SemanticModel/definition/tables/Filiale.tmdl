@@ -1,0 +1,31 @@
+table Filiale
+	lineageTag: c1acc424-e05c-44f7-8954-d3b6fde75148
+
+	measure 'Nbre filiale' = ```
+			COUNTROWS(Filiale) 
+			```
+		formatString: 0
+		lineageTag: 60976172-8ad2-48c7-bb37-bf29add3926c
+
+	column Filiale
+		dataType: string
+		lineageTag: 207d3493-fa67-4060-85ce-e0b5a0e8c41a
+		summarizeBy: none
+		sourceColumn: Filiale
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Filiale = m
+		mode: import
+		source =
+				let
+				    Source = Data_RH,
+				    #"Autres colonnes supprimées" = Table.SelectColumns(Source,{"Filiale"}),
+				    #"Doublons supprimés" = Table.Distinct(#"Autres colonnes supprimées")
+				in
+				    #"Doublons supprimés"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

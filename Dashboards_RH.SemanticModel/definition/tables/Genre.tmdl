@@ -1,0 +1,25 @@
+table Genre
+	lineageTag: b35f20a5-6784-4524-9dca-c9e0f5872fac
+
+	column Sexe
+		dataType: string
+		lineageTag: c2e193ee-37fc-438a-995c-375ab6728f91
+		summarizeBy: none
+		sourceColumn: Sexe
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Genre = m
+		mode: import
+		source =
+				let
+				    Source = Data_RH,
+				    #"Autres colonnes supprimées" = Table.SelectColumns(Source,{"Sexe"}),
+				    #"Doublons supprimés" = Table.Distinct(#"Autres colonnes supprimées")
+				in
+				    #"Doublons supprimés"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,100 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 901.94331863206651,
+            "y": 4.4215414815744793
+          },
+          "nodeIndex": "Calendrier",
+          "nodeLineageTag": "d2f8afe5-6753-4f5c-b25e-a0f8aae18b0e",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 262.50265731303091,
+            "y": 149.96646538986741
+          },
+          "nodeIndex": "Data_RH",
+          "nodeLineageTag": "af2ea879-62f4-45f7-af4d-88bf7eb9e581",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 515.50415211975064
+          },
+          "nodeIndex": "Departements",
+          "nodeLineageTag": "8bfb0614-d5c1-4d82-83dd-b5de4c8f1b10",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 621.84662852133306,
+            "y": 153.49944415784347
+          },
+          "nodeIndex": "Departs",
+          "nodeLineageTag": "bd5a62b2-1195-4123-a37e-fc945613705f",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 0
+          },
+          "nodeIndex": "Filiale",
+          "nodeLineageTag": "c1acc424-e05c-44f7-8954-d3b6fde75148",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 803.94924761506957,
+            "y": 524.42232470066028
+          },
+          "nodeIndex": "Genre",
+          "nodeLineageTag": "b35f20a5-6784-4524-9dca-c9e0f5872fac",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 5
+        }
+      ],
+      "name": "Toutes les tables",
+      "zoomValue": 75.777777777777771,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Toutes les tables",
+  "defaultDiagram": "Toutes les tables"
+}

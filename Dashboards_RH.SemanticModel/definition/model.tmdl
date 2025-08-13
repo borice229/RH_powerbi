@@ -1,0 +1,30 @@
+model Model
+	culture: fr-FR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: fr-FR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["Data_RH","Departs","Filiale","Departements","Genre","Calendrier"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.146.705.0 (25.08)+b71502aff0a01340c88f384884ef42771068f115
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table Data_RH
+ref table DateTableTemplate_9283a4b5-e0a7-4a0f-a138-6fd487e3c398
+ref table LocalDateTable_23c69264-dd6c-4df2-9464-6a9e4ab6a480
+ref table LocalDateTable_63281db5-84dd-4b89-b768-088cfb4d5d56
+ref table Departs
+ref table LocalDateTable_c083a543-009f-4cff-b19d-5ffb0151944e
+ref table Filiale
+ref table Departements
+ref table Genre
+ref table Calendrier
+ref table LocalDateTable_9f896226-2284-48c3-83f2-1466c80547d9
+
+ref cultureInfo fr-FR
+

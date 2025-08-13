@@ -1,0 +1,131 @@
+table Departs
+	lineageTag: bd5a62b2-1195-4123-a37e-fc945613705f
+
+	measure Nbre_depart = COUNTROWS(Departs)
+		formatString: 0
+		lineageTag: c7db4353-7847-47f4-9bbd-f337017d7b74
+
+	column Matricule
+		dataType: int64
+		formatString: 0
+		lineageTag: de76b00f-cf15-4f1c-ba06-2faba73c082e
+		summarizeBy: none
+		sourceColumn: Matricule
+
+		annotation SummarizationSetBy = Automatic
+
+	column Salaire
+		dataType: int64
+		formatString: 0
+		lineageTag: 837cdebe-3132-472e-9d4a-53e471376d0d
+		summarizeBy: sum
+		sourceColumn: Salaire
+
+		annotation SummarizationSetBy = Automatic
+
+	column Poste
+		dataType: string
+		lineageTag: 284fba5a-4268-426d-89bb-68648488cb4e
+		summarizeBy: none
+		sourceColumn: Poste
+
+		annotation SummarizationSetBy = Automatic
+
+	column Filiale
+		dataType: string
+		lineageTag: 94b88583-a5b9-44d8-aad6-d8fc73a0f43b
+		summarizeBy: none
+		sourceColumn: Filiale
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date naissance'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 1e2c68f6-9671-492b-84c5-576397304518
+		summarizeBy: none
+		sourceColumn: Date naissance
+
+		variation Variation
+			isDefault
+			relationship: 874f40ec-b9ba-42b3-8257-cd493ce705ae
+			defaultHierarchy: LocalDateTable_c083a543-009f-4cff-b19d-5ffb0151944e.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Sexe
+		dataType: string
+		lineageTag: ddb9cc03-e59b-49ff-974a-c052eb41652f
+		summarizeBy: none
+		sourceColumn: Sexe
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date départ'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 543eb1c9-eb18-471b-aa00-a4648f52974c
+		summarizeBy: none
+		sourceColumn: Date départ
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Department
+		dataType: string
+		lineageTag: c864f506-12a4-433d-a97f-1b801ab6b047
+		summarizeBy: none
+		sourceColumn: Department
+
+		annotation SummarizationSetBy = Automatic
+
+	column ManagerName
+		dataType: string
+		lineageTag: 2f4ce3ae-846a-4555-a16a-4b733b5be8e8
+		summarizeBy: none
+		sourceColumn: ManagerName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Echelon
+		dataType: int64
+		formatString: 0
+		lineageTag: c7dc14b4-e9bb-4a9a-a9a6-fc48860c11ba
+		summarizeBy: sum
+		sourceColumn: Echelon
+
+		annotation SummarizationSetBy = Automatic
+
+	column NOM
+		dataType: string
+		lineageTag: 8dff2d3e-f997-4727-979b-c7e09fc08e1f
+		summarizeBy: none
+		sourceColumn: NOM
+
+		annotation SummarizationSetBy = Automatic
+
+	column Prenom
+		dataType: string
+		lineageTag: 495ab2ff-140d-46e1-992e-625c990cd041
+		summarizeBy: none
+		sourceColumn: Prenom
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Departs = m
+		mode: import
+		source =
+				let
+				    Source = Data_RH,
+				    #"Colonnes supprimées" = Table.RemoveColumns(Source,{"Date Embauche"}),
+				    #"Lignes filtrées" = Table.SelectRows(#"Colonnes supprimées", each ([Date départ] <> null))
+				in
+				    #"Lignes filtrées"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
